@@ -1,0 +1,64 @@
+@import url('https://fonts.googleapis.com/css2?family=Gabriela&display=swap');
+$main-color: #FF9600;
+*{
+  font-family: 'Gabriela', serif;
+}
+#landing {
+  min-height: 22rem;
+  position: relative;
+  align-items: end !important;
+  padding: 2rem;
+  background-image: url("https://images.unsplash.com/photo-1504674900247-0877df9cc836?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80");
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  &::before {
+    content: '';
+    width: 100%;
+    height: 100% ;
+    position: absolute;
+    background-color: rgba(0,0,0,0.2);
+    z-index: 1;
+    bottom: 0;
+  }
+  *{
+    z-index: 3;
+  }
+}
+nav.navbar {
+  background-color: transparent !important;
+  position: fixed !important;
+  z-index: 9;
+  width: 100%;
+  top: 0;
+  .navbar-brand {
+    color: $main-color;
+    filter: drop-shadow(0px 0px 9px rgba(0, 0, 0, 0.5));
+    font: {
+      size: 2rem;
+    };
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+  }
+  .nav-link {
+    color: #fff;
+  }
+  .nav-link.active {
+    color: #fff;
+    text-decoration: underline;
+  }
+  button {
+    color: #ffffff !important;
+  }
+}
+#slogo {
+  position: relative;
+  background: -webkit-linear-gradient( #FF9600 60.06%, #A66B15 100.51%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  text-align: center;
+  font: {
+    size: 4rem !important;
+  };
+}

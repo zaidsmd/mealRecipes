@@ -19,7 +19,7 @@
   width: 100%;
   height: 100%;
   position: absolute;
-  background-color: rgba(0, 0, 0, 0.2);
+  background-color: rgba(0, 0, 0, 0.3);
   z-index: 1;
   bottom: 0;
 }
@@ -29,28 +29,38 @@
 #landing .input-group {
   position: absolute;
   bottom: 0;
-  transform: translateY(75%);
-  width: 100%;
+  right: 50%;
+  transform: translateY(75%) translateX(50%);
+  width: 90%;
   min-width: 200px;
   max-width: 700px;
-}
-#landing .input-group input {
-  color: #FF9600 !important;
   border-radius: 99rem !important;
   border: none;
   box-shadow: 0 0 25px rgba(0, 0, 0, 0.25);
+  background-color: white;
+}
+#landing .input-group input {
+  color: #FF9600 !important;
+  background-color: transparent;
 }
 #landing .input-group input::placeholder {
   color: #FF9600;
 }
+#landing .input-group input:focus {
+  border: none;
+  box-shadow: none;
+}
+#landing .input-group * {
+  border: none;
+}
 #landing .input-group button {
   color: #FF9600;
+  padding: 0 2rem;
   border: none;
-  transform: translateX(-110%);
 }
 #landing .input-group button:hover {
   background-color: transparent;
-  transform: scale(1.1) translateX(-100%);
+  transform: scale(1.2);
 }
 
 nav.navbar {
@@ -68,13 +78,6 @@ nav.navbar .navbar-brand {
   align-items: center;
   gap: 1rem;
 }
-nav.navbar .nav-link {
-  color: #fff;
-}
-nav.navbar .nav-link.active {
-  color: #fff;
-  text-decoration: underline;
-}
 nav.navbar button {
   color: #ffffff !important;
   font-size: 2rem;
@@ -88,6 +91,59 @@ nav.navbar button {
   -webkit-text-fill-color: transparent;
   text-align: center;
   font-size: 4rem !important;
+}
+@media screen and (max-width: 576px) {
+  #slogo {
+    font-size: 3rem !important;
+  }
+}
+@media screen and (max-width: 450px) {
+  #slogo {
+    font-size: 2.5rem !important;
+  }
+}
+
+.card {
+  box-shadow: 0 0 25px rgba(0, 0, 0, 0.25);
+}
+.card a {
+  background-color: #FF9600;
+  border: none;
+  border-radius: 90rem;
+}
+.card a:hover {
+  background-color: #e68700;
+}
+
+#offcanvasNavbar #offcanvasNavbarLabel {
+  text-decoration: none;
+  color: #FF9600;
+  font-size: 1.5rem;
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+#offcanvasNavbar .nav-link.active {
+  color: #FF9600;
+}
+#offcanvasNavbar .nav-link {
+  color: white;
+}
+#offcanvasNavbar .nav-link.side {
+  color: rgba(0, 0, 0, 0.6);
+}
+
+.pagination {
+  border-radius: 99rem;
+  box-shadow: 0 0 25px rgba(0, 0, 0, 0.25);
+  overflow: hidden;
+}
+.pagination * {
+  border: none;
+  color: #FF9600;
+}
+.pagination *:hover {
+  color: #e68700;
 }
 
 /*# sourceMappingURL=style.css.map */

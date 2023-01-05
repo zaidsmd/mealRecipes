@@ -76,6 +76,9 @@ nav.navbar.scrolled {
 nav.navbar.scrolled button {
   color: black !important;
 }
+nav.navbar.scrolled .nav-link {
+  color: black !important;
+}
 nav.navbar.scrolled .navbar-brand {
   filter: none !important;
 }
@@ -156,6 +159,7 @@ nav.navbar button {
 .pagination * {
   border: none;
   color: #FF9600 !important;
+  cursor: pointer;
   background-color: #F2F2F4 !important;
 }
 .pagination *:hover {

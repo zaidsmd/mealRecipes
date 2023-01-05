@@ -1,11 +1,25 @@
 let lastArray ;
+let searchInput = document.querySelector('#search-bar');
+let contentContainer = document.querySelector('#content');
 for (let i = 0; i < 6; i++) {
     getDataFromApi('https://www.themealdb.com/api/json/v1/1/random.php').then((response) => {
         showInCards(response);
     });
 }
-
-
+searchInput.addEventListener('keypress',(e)=>{
+    if (e.key === "Enter"){
+        getDataFromApi(`https://www.themealdb.com/api/json/v1/1/search.php?s=${searchInput.value.trim()}`).then((response)=>{
+            contentContainer.innerHTML=''
+            showInCards(response)
+        })
+    }
+})
+document.querySelector('#search-btn').addEventListener('click',()=>{
+        getDataFromApi(`https://www.themealdb.com/api/json/v1/1/search.php?s=${searchInput.value.trim()}`).then((response)=>{
+            contentContainer.innerHTML=''
+            showInCards(response)
+        })
+})
 //==========Functions=================
 function recipeMe(data) {
     let meal = data.meals[0]
@@ -19,70 +33,88 @@ function recipeMe(data) {
     modalBody.append(image);
     let instructionsTitle = document.createElement('h5')
     instructionsTitle.append('Instructions');
+    instructionsTitle.classList.add('mt-4')
     modalBody.append(instructionsTitle)
     let instructions =document.createElement('p');
     instructions.append(meal.strInstructions);
     modalBody.append(instructions);
-    let ingridients = document.createElement('ul');
+    let ingredientTitle = document.createElement('h5');
+    ingredientTitle.append('Ingredients');
+    modalBody.append(ingredientTitle);
+    let ingredients = document.createElement('ul');
     for (let i = 1; i <=20 ; i++) {
         let mesure = "strMeasure"+i;
         let ingredient = "strIngredient"+i;
-        if (meal[mesure] !== ""){
+        if (meal[mesure] !== "" && meal[mesure]!== null && meal[mesure]!== " "){
             let li = document.createElement('li');
             li.append(`${meal[ingredient]}: ${meal[mesure]}`)
-            ingridients.append(li);
+            ingredients.append(li);
         }
     }
-    modalBody.append(ingridients);
+    modalBody.append(ingredients);
 }
 function showInCards(data,indexOfArray=0) {
     lastArray =[];
     let firstIndex = 0;
     let lasIndex = 6;
-    for (let i = 0; i < Math.ceil(data.meals.length / 6); i++) { // slice the array of data into smaller arrays in which every one of them represent a page
-        if (lasIndex > data.meals.length) { // check if the last index is greater than the array length
-            lasIndex = data.meals.length
+    if (data.meals == null){
+        contentContainer.innerHTML = "";
+        let img = document.createElement('img');
+        img.setAttribute('src','img/stir-fry.png');
+        img.setAttribute('alt','error-sticker');
+        img.classList.add('opacity-50')
+        img.style.width = "300px";
+        contentContainer.append(img)
+        let notFound = document.createElement('h4')
+        notFound.append("There is still no recipe for your demand we will try to add it soon");
+        notFound.setAttribute('class','opacity-50 text-center')
+        contentContainer.append(notFound);
+        document.querySelector('#pagination').innerHTML = '';
+    }else  {
+        for (let i = 0; i < Math.ceil(data.meals.length / 6); i++) { // slice the array of data into smaller arrays in which every one of them represent a page
+            if (lasIndex > data.meals.length) { // check if the last index is greater than the array length
+                lasIndex = data.meals.length
+            }
+            lastArray.push(data.meals.slice(firstIndex, lasIndex));
+            lasIndex += 6;
+            firstIndex += 6;
         }
-        lastArray.push(data.meals.slice(firstIndex, lasIndex));
-        lasIndex += 6;
-        firstIndex += 6;
-    }
-    lastArray[indexOfArray].forEach((meal) => {
-        let card = document.createElement('div');
-        card.setAttribute('class', 'p-0 card col-xl-3 col-sm-8 col-md-5 col-lg-4');
-        let image = document.createElement('img');
-        image.setAttribute('src', `${meal.strMealThumb}`);
-        image.setAttribute('class', 'card-img-top img-fluid');
-        image.setAttribute('alt', 'meal thumbnail');
-        card.append(image);
-        let cardBody = document.createElement('div');
-        cardBody.setAttribute('class', 'card-body d-flex flex-column justify-content-between');
-        let cardTitle = document.createElement('h5');
-        cardTitle.setAttribute('class', 'card-title');
-        cardTitle.append(meal.strMeal);
-        cardBody.append(cardTitle);
-        let buttonContainer = document.createElement('div');
-        buttonContainer.setAttribute('class', 'w-100 mt-4 d-flex justify-content-center align-items-center');
-        let button = document.createElement('button');
-        button.setAttribute('class', 'btn btn-primary');
-        button.setAttribute('data-bs-toggle', 'modal');
-        button.setAttribute('data-bs-target', '#recipeModal');
-        button.setAttribute('type', 'button');
-        button.append('Show The Recipe');
-        button.setAttribute('data-id', meal.idMeal);
-        button.addEventListener('click',(e)=>{
-            getDataFromApi(`https://www.themealdb.com/api/json/v1/1/lookup.php?i=${e.target.dataset.id}`).then((response)=>{
-                recipeMe(response)
+        lastArray[indexOfArray].forEach((meal) => {
+            let card = document.createElement('div');
+            card.setAttribute('class', 'p-0 card col-xl-3 col-sm-8 col-md-5 col-lg-4');
+            let image = document.createElement('img');
+            image.setAttribute('src', `${meal.strMealThumb}`);
+            image.setAttribute('class', 'card-img-top img-fluid');
+            image.setAttribute('alt', 'meal thumbnail');
+            card.append(image);
+            let cardBody = document.createElement('div');
+            cardBody.setAttribute('class', 'card-body d-flex flex-column justify-content-between');
+            let cardTitle = document.createElement('h5');
+            cardTitle.setAttribute('class', 'card-title');
+            cardTitle.append(meal.strMeal);
+            cardBody.append(cardTitle);
+            let buttonContainer = document.createElement('div');
+            buttonContainer.setAttribute('class', 'w-100 mt-4 d-flex justify-content-center align-items-center');
+            let button = document.createElement('button');
+            button.setAttribute('class', 'btn btn-primary');
+            button.setAttribute('data-bs-toggle', 'modal');
+            button.setAttribute('data-bs-target', '#recipeModal');
+            button.setAttribute('type', 'button');
+            button.append('Show The Recipe');
+            button.setAttribute('data-id', meal.idMeal);
+            button.addEventListener('click',(e)=>{
+                getDataFromApi(`https://www.themealdb.com/api/json/v1/1/lookup.php?i=${e.target.dataset.id}`).then((response)=>{
+                    recipeMe(response)
+                })
             })
+            buttonContainer.append(button);
+            cardBody.append(buttonContainer);
+            card.append(cardBody)
+            contentContainer.append(card);
         })
-        buttonContainer.append(button);
-        cardBody.append(buttonContainer);
-        card.append(cardBody)
-        document.querySelector('#content').append(card);
-    })
-    createPages(data.meals,indexOfArray)
+        createPages(data.meals,indexOfArray)
+    }
 }
-
 function getDataFromApi(url,) {
     return fetch(url)
         .then(async (response) => {
@@ -91,10 +123,12 @@ function getDataFromApi(url,) {
         })
 }
 function extract(arrayToExtract) {
-    let extractedArray = [];
+    let extractedArray = {
+        meals :[]
+    };
     arrayToExtract.forEach(e => {
         e.forEach(e => {
-            extractedArray.push(e);
+            extractedArray.meals.push(e);
         })
     })
     return extractedArray
@@ -108,10 +142,11 @@ function createPages(data, indexOfData) {
     let a = document.createElement('a');
     a.classList.add('page-link');
     a.append('«');
-    if (indexOfData == 0) {
+    if (indexOfData === 0) {
         previous.classList.add('disabled')
     } else { //this statement here is to test the page shown is it the first if so the previous button should be disabled bcs there is no previous page
         a.addEventListener('click', () => {
+            contentContainer.innerHTML="";
             showInCards(extract(lastArray), document.querySelector('#pagination .active').dataset.page - 2); // this is just call to the show  and extract functions
         });
     }
@@ -143,6 +178,7 @@ function createPages(data, indexOfData) {
         document.querySelector('#pagination li:last-child').classList.add('disabled')
     } else {//this statement here is to test the page shown is it the last if so the next button should be disabled bcs there is no next page
         document.querySelector('#pagination li:last-child').addEventListener('click', () => {
+            contentContainer.innerHTML="";
             showInCards(extract(lastArray), +document.querySelector(`#pagination .active`).dataset.page);
         });
     }

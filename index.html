@@ -8,14 +8,14 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet"
           integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
     <link rel="stylesheet" href="style.css">
-    <script src="https://kit.fontawesome.com/a5fdcae6a3.js" crossorigin="anonymous"></script>
     <title>Recipes House</title>
 </head>
 <body>
 <nav class="navbar navbar-expand-lg bg-body-tertiary">
     <div class="container-fluid d-flex justify-content-between ">
-        <a class="navbar-brand " href="#"><img src="img/Vector.png" alt="">  Recipes House</a>
-        <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasNavbar" aria-controls="offcanvasNavbar">
+        <a class="navbar-brand " href="#"><img src="img/Vector.png" alt=""> Recipes House</a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasNavbar"
+                aria-controls="offcanvasNavbar">
             <i class="fa-solid fa-bars"></i>
         </button>
         <div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasNavbar" aria-labelledby="offcanvasNavbarLabel">
@@ -39,91 +39,50 @@
 <section id="landing" class=" d-flex justify-content-center align-items-center">
     <p id="slogo" class="h1 text-capitalize">Find your tasty <br> Recipe easily</p>
     <div class="input-group mb-3">
-        <input type="text" class="form-control py-3 px-4" placeholder="Search..." aria-label="Searched meal" aria-describedby="button-addon2">
-        <button class="btn btn-outline-secondary" type="button" id="button-addon2"><i class="fa-solid fa-magnifying-glass"></i></button>
+        <input type="text" class="form-control py-3 px-4" placeholder="Search..." aria-label="Searched meal"
+               aria-describedby="search-btn">
+        <button class="btn btn-outline-secondary" type="button" id="search-btn"><i
+                class="fa-solid fa-magnifying-glass"></i></button>
     </div>
 </section>
-<section class="container-fluid py-5 d-flex flex-column gap-5 justify-content-center align-items-center " >
-    <div class="col-12 flex-wrap row column-gap-5 row-gap-3 px-5 justify-content-center">
-        <div class="p-0 card col-xl-3 col-sm-8 col-md-5 col-lg-4">
-            <img src="https://www.themealdb.com/images/media/meals/58oia61564916529.jpg" class="card-img-top img-fluid" alt="meal thumbnail">
-            <div class="card-body d-flex flex-column justify-content-between">
-                <h5 class="card-title">Card title</h5>
-                <div class="w-100 mt-4 d-flex justify-content-center align-items-center">
-                    <a href="#" class="btn btn-primary">Go somewhere</a>
-                </div>
-
-            </div>
-        </div>
-        <div class="p-0 card col-xl-3 col-sm-8 col-md-5 col-lg-4">
-            <img src="https://www.themealdb.com/images/media/meals/58oia61564916529.jpg" class="card-img-top img-fluid" alt="meal thumbnail">
-            <div class="card-body d-flex flex-column justify-content-between">
-                <h5 class="card-title">Card title</h5>
-                <div class="w-100 mt-4 d-flex justify-content-center align-items-center">
-                    <a href="#" class="btn btn-primary">Go somewhere</a>
-                </div>
-
-            </div>
-        </div>
-        <div class="p-0 card col-xl-3 col-sm-8 col-md-5 col-lg-4">
-            <img src="https://www.themealdb.com/images/media/meals/58oia61564916529.jpg" class="card-img-top img-fluid" alt="meal thumbnail">
-            <div class="card-body d-flex flex-column justify-content-between">
-                <h5 class="card-title">Card title</h5>
-                <div class="w-100 mt-4 d-flex justify-content-center align-items-center">
-                    <a href="#" class="btn btn-primary">Go somewhere</a>
-                </div>
-
-            </div>
-        </div>
-        <div class="p-0 card col-xl-3 col-sm-8 col-md-5 col-lg-4">
-            <img src="https://www.themealdb.com/images/media/meals/58oia61564916529.jpg" class="card-img-top img-fluid" alt="meal thumbnail">
-            <div class="card-body d-flex flex-column justify-content-between">
-                <h5 class="card-title">Card title</h5>
-                <div class="w-100 mt-4 d-flex justify-content-center align-items-center">
-                    <a href="#" class="btn btn-primary">Go somewhere</a>
-                </div>
-
-            </div>
-        </div>
-        <div class="p-0 card col-xl-3 col-sm-8 col-md-5 col-lg-4">
-            <img src="https://www.themealdb.com/images/media/meals/58oia61564916529.jpg" class="card-img-top img-fluid" alt="meal thumbnail">
-            <div class="card-body d-flex flex-column justify-content-between">
-                <h5 class="card-title">Card title</h5>
-                <div class="w-100 mt-4 d-flex justify-content-center align-items-center">
-                    <a href="#" class="btn btn-primary">Go somewhere</a>
-                </div>
-
-            </div>
-        </div>
-        <div class="p-0 card col-xl-3 col-sm-8 col-md-5 col-lg-4">
-            <img src="https://www.themealdb.com/images/media/meals/58oia61564916529.jpg" class="card-img-top img-fluid" alt="meal thumbnail">
-            <div class="card-body d-flex flex-column justify-content-between">
-                <h5 class="card-title">Card title</h5>
-                <div class="w-100 mt-4 d-flex justify-content-center align-items-center">
-                    <a href="#" class="btn btn-primary">Go somewhere</a>
-                </div>
-
-            </div>
-        </div>
+<section class="container-fluid py-5 d-flex flex-column gap-5 justify-content-center align-items-center ">
+    <div id="content" class="col-12 flex-wrap row column-gap-5 row-gap-3 px-5 justify-content-center">
     </div>
-    <nav aria-label="Page navigation example">
+    <nav id="pagination" aria-label="Page navigation example">
         <ul class="pagination">
             <li class="page-item">
-                <a class="page-link" href="#" aria-label="Previous">
+                <a class="page-link" href="" aria-label="Previous">
                     <span aria-hidden="true">&laquo;</span>
                 </a>
             </li>
             <li class="page-item"><a class="page-link" href="#">1/2</a></li>
             <li class="page-item">
-                <a class="page-link" href="#" aria-label="Next">
+                <a class="page-link" href="" aria-label="Next">
                     <span aria-hidden="true">&raquo;</span>
                 </a>
             </li>
         </ul>
     </nav>
+    <!-- Modal -->
+    <div class="modal fade" id="recipeModal" tabindex="-1" aria-labelledby="modal-label" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h1 class="modal-title fs-5" id="modal-label">Modal title</h1>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    ...
+                </div>
+                <div class="modal-footer">
+                </div>
+            </div>
+        </div>
+    </div>
 </section>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN"
         crossorigin="anonymous"></script>
+<script src="script.js"></script>
 </body>
 </html>

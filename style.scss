@@ -1,5 +1,7 @@
 @import url('https://fonts.googleapis.com/css2?family=Gabriela&display=swap');
+$main-grey :#F2F2F4;
 $main-color: #FF9600;
+$disabled-color : #FFDDB6;
 *{
   font-family: 'Gabriela', serif;
 }
@@ -69,6 +71,15 @@ nav.navbar {
   z-index: 9;
   width: 100%;
   top: 0;
+  &.scrolled {
+    background-color: rgba(255,255,255,.7) !important;
+    button {
+      color: black !important;
+    }
+    .navbar-brand {
+      filter: none !important;
+    }
+  }
   .navbar-brand {
     color: $main-color;
     filter: drop-shadow(0px 0px 9px rgba(0, 0, 0, 0.5));
@@ -104,7 +115,7 @@ nav.navbar {
   }
 }
 .card {
-  a {
+  button {
     background-color: $main-color ;
     border: none;
     border-radius: 90rem;
@@ -126,7 +137,7 @@ nav.navbar {
     gap: 1rem;
   }
 .nav-link.active {
-  color: $main-color;
+  color: $main-color !important;
 }
   .nav-link {
     color: white;
@@ -137,13 +148,20 @@ nav.navbar {
 }
 .pagination {
   border-radius: 99rem ;
-  box-shadow: 0 0 25px rgba(0, 0, 0, 0.25);
   overflow: hidden;
+  background-color: $main-grey !important;
+  .active {
+    color: black !important;
+  }
+  .disabled a {
+    color: $disabled-color !important;
+  }
   *{
     border: none;
-    color: $main-color;
+    color: $main-color !important;
     &:hover {
       color: darken($main-color,5);
     }
+    background-color: $main-grey !important;
   }
 }

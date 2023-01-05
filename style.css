@@ -70,6 +70,15 @@ nav.navbar {
   width: 100%;
   top: 0;
 }
+nav.navbar.scrolled {
+  background-color: rgba(255, 255, 255, 0.7) !important;
+}
+nav.navbar.scrolled button {
+  color: black !important;
+}
+nav.navbar.scrolled .navbar-brand {
+  filter: none !important;
+}
 nav.navbar .navbar-brand {
   color: #FF9600;
   filter: drop-shadow(0px 0px 9px rgba(0, 0, 0, 0.5));
@@ -106,12 +115,12 @@ nav.navbar button {
 .card {
   box-shadow: 0 0 25px rgba(0, 0, 0, 0.25);
 }
-.card a {
+.card button {
   background-color: #FF9600;
   border: none;
   border-radius: 90rem;
 }
-.card a:hover {
+.card button:hover {
   background-color: #e68700;
 }
 
@@ -124,7 +133,7 @@ nav.navbar button {
   gap: 1rem;
 }
 #offcanvasNavbar .nav-link.active {
-  color: #FF9600;
+  color: #FF9600 !important;
 }
 #offcanvasNavbar .nav-link {
   color: white;
@@ -135,12 +144,19 @@ nav.navbar button {
 
 .pagination {
   border-radius: 99rem;
-  box-shadow: 0 0 25px rgba(0, 0, 0, 0.25);
   overflow: hidden;
+  background-color: #F2F2F4 !important;
+}
+.pagination .active {
+  color: black !important;
+}
+.pagination .disabled a {
+  color: #FFDDB6 !important;
 }
 .pagination * {
   border: none;
-  color: #FF9600;
+  color: #FF9600 !important;
+  background-color: #F2F2F4 !important;
 }
 .pagination *:hover {
   color: #e68700;

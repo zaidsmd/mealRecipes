@@ -4,7 +4,6 @@ nav.navbar {
   z-index: 9;
   width: 100%;
   top: 0;
-
   &.scrolled {
     background-color: rgba(255, 255, 255, .7) !important;
 
@@ -20,7 +19,9 @@ nav.navbar {
       filter: none !important;
     }
   }
-
+  .container-fluid {
+    --bs-gutter-x: .5rem;
+  }
   .navbar-brand {
     color: $main-color;
     filter: drop-shadow(0px 0px 9px rgba(0, 0, 0, 0.5));
@@ -30,6 +31,10 @@ nav.navbar {
     display: flex;
     align-items: center;
     gap: 1rem;
+    @media screen and (max-width: 490px) {
+      font-size: 1.5rem;
+      gap: .5rem;
+    }
   }
 
   button {

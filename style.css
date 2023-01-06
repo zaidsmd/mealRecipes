@@ -70,8 +70,14 @@
   right: 50%;
   transform: translateY(50%) translateX(50%);
   width: 90%;
-  min-width: 450px;
+  min-width: 200px;
   max-width: 900px;
+}
+@media screen and (max-width: 490px) {
+  #landing .select-group {
+    flex-direction: column !important;
+    transform: translateY(75%) translateX(50%);
+  }
 }
 #landing .select-group .form-floating {
   border-radius: 99rem !important;
@@ -104,6 +110,12 @@
 @media screen and (max-width: 450px) {
   #slogo {
     font-size: 2.5rem !important;
+  }
+}
+
+@media screen and (max-width: 490px) {
+  #content {
+    padding-top: 8rem !important;
   }
 }
 

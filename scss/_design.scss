@@ -71,8 +71,12 @@
     right: 50%;
     transform: translateY(50%) translateX(50%);
     width: 90%;
-    min-width: 450px;
+    min-width: 200px;
     max-width: 900px;
+    @media screen and (max-width: 490px) {
+      flex-direction: column !important;
+      transform: translateY(75%) translateX(50%);
+    }
     .form-floating {
       @include rounded-borders;
 
@@ -103,5 +107,10 @@
   }
   @media screen and (max-width: 450px) {
     font-size: 2.5rem !important;
+  }
+}
+#content {
+  @media screen and (max-width: 490px) {
+    padding-top: 8rem !important;
   }
 }

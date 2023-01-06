@@ -1,26 +1,50 @@
 let lastArray ;
-let searchInput = document.querySelector('#search-bar');
+let areaSelect = document.querySelector('#areaSelect');
+let categorySelect = document.querySelector('#categorySelect');
 let contentContainer = document.querySelector('#content');
-for (let i = 0; i < 6; i++) {
-    getDataFromApi('https://www.themealdb.com/api/json/v1/1/random.php').then((response) => {
-        showInCards(response);
-    });
-}
-searchInput.addEventListener('keypress',(e)=>{
-    if (e.key === "Enter"){
-        getDataFromApi(`https://www.themealdb.com/api/json/v1/1/search.php?s=${searchInput.value.trim()}`).then((response)=>{
-            contentContainer.innerHTML=''
-            showInCards(response)
-        })
-    }
-})
-document.querySelector('#search-btn').addEventListener('click',()=>{
-        getDataFromApi(`https://www.themealdb.com/api/json/v1/1/search.php?s=${searchInput.value.trim()}`).then((response)=>{
-            contentContainer.innerHTML=''
-            showInCards(response)
-        })
+let areaData = [];
+let categoryData= [] ;
+let filteredData = {
+    meals: []
+};
+//================== executing start ==================
+
+getOptions("https://www.themealdb.com/api/json/v1/1/list.php?a=list","strArea","Moroccan",areaSelect);
+getOptions("https://www.themealdb.com/api/json/v1/1/list.php?c=list","strCategory","Lamb",categorySelect);
+getDataFromApi(`https://www.themealdb.com/api/json/v1/1/filter.php?a=Moroccan`).then(async(response)=>{
+    areaData = await response.meals;
+}).then(()=>{
+    getDataFromApi("https://www.themealdb.com/api/json/v1/1/filter.php?c=Lamb").then(async(response)=>{
+        categoryData = await response.meals
+    }).then(()=>{
+        filter(filteredData.meals);
+       showInCards(filteredData)
+    })
 })
 //==========Functions=================
+function getOptions(url,dataToGet,selectedValue,selectElement) {
+    return fetch(url).then(async(response)=>{
+        let data = await response.json()
+        data.meals.forEach((element)=>{
+            let option = document.createElement('option');
+            option.append(element[dataToGet]);
+            if (element[dataToGet] === selectedValue){
+                option.setAttribute('selected','');
+            }
+            selectElement.append(option)
+        })
+    })
+
+}
+function filter(array) {
+    areaData.forEach((areaMeal)=>{
+        categoryData.forEach((categoryMeal)=>{
+            if (areaMeal.strMeal === categoryMeal.strMeal) {
+                array.push(areaMeal)
+            }
+        })
+    })
+}
 function recipeMe(data) {
     let meal = data.meals[0]
     document.querySelector("#modal-label").innerHTML = meal.strMeal;
@@ -184,7 +208,6 @@ function createPages(data, indexOfData) {
     }
 
 }
-
 // ============= design ========================
 window.onscroll = () => {
     if (scrollY >= 200) {

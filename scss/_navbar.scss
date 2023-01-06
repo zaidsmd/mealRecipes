@@ -1,0 +1,66 @@
+nav.navbar {
+  background-color: transparent !important;
+  position: fixed !important;
+  z-index: 9;
+  width: 100%;
+  top: 0;
+
+  &.scrolled {
+    background-color: rgba(255, 255, 255, .7) !important;
+
+    button {
+      color: black !important;
+    }
+
+    .nav-link {
+      color: black !important;
+    }
+
+    .navbar-brand {
+      filter: none !important;
+    }
+  }
+
+  .navbar-brand {
+    color: $main-color;
+    filter: drop-shadow(0px 0px 9px rgba(0, 0, 0, 0.5));
+    font: {
+      size: 2rem;
+    };
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+  }
+
+  button {
+    color: #ffffff !important;
+    font: {
+      size: 2rem;
+    };
+    border: none;
+  }
+}
+#offcanvasNavbar {
+  #offcanvasNavbarLabel {
+    text-decoration: none;
+    color: $main-color;
+    font: {
+      size: 1.5rem;
+    };
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+  }
+
+  .nav-link.active {
+    color: $main-color !important;
+  }
+
+  .nav-link {
+    color: white;
+  }
+
+  .nav-link.side {
+    color: rgba(0, 0, 0, .6);
+  }
+}

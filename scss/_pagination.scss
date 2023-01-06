@@ -1,0 +1,25 @@
+.pagination {
+  @include rounded-borders;
+  overflow: hidden;
+  background-color: $main-grey !important;
+
+  .active {
+    color: black !important;
+  }
+
+  .disabled a {
+    color: $disabled-color !important;
+  }
+
+  * {
+    border: none;
+    color: $main-color !important;
+    cursor: pointer;
+
+    &:hover {
+      color: darken($main-color, 5);
+    }
+
+    background-color: $main-grey !important;
+  }
+}

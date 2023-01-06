@@ -1,0 +1,12 @@
+@mixin rounded-borders {
+  border-radius: 99rem !important;
+  overflow: hidden;
+}
+@mixin background-img($url,$pos-y,$pos-x){
+  background: url($url) {
+    position-x: $pos-x;
+    position-y: $pos-y;
+    repeat: no-repeat;
+    size: cover;
+  };
+}

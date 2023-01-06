@@ -1,0 +1,13 @@
+.card {
+  button {
+    background-color: $main-color;
+    border: none;
+    border-radius: 90rem;
+
+    &:hover {
+      background-color: darken($main-color, 5);
+    }
+  }
+
+  box-shadow: $box-shadow;
+}

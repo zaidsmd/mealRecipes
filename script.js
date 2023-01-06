@@ -1,25 +1,42 @@
 let lastArray ;
 let searchInput = document.querySelector('#search-bar');
 let contentContainer = document.querySelector('#content');
+//================== executing start ==================
 for (let i = 0; i < 6; i++) {
     getDataFromApi('https://www.themealdb.com/api/json/v1/1/random.php').then((response) => {
         showInCards(response);
     });
-}
+} //create 6 cards with random recipes
 searchInput.addEventListener('keypress',(e)=>{
     if (e.key === "Enter"){
-        getDataFromApi(`https://www.themealdb.com/api/json/v1/1/search.php?s=${searchInput.value.trim()}`).then((response)=>{
-            contentContainer.innerHTML=''
-            showInCards(response)
-        })
+        contentContainer.innerHTML=''
+        if (searchInput.value.trim() !=="") {
+            getDataFromApi(`https://www.themealdb.com/api/json/v1/1/search.php?s=${searchInput.value.trim()}`).then((response)=>{
+                showInCards(response)
+            })
+        }else {
+            for (let i = 0; i < 6; i++) {
+                getDataFromApi('https://www.themealdb.com/api/json/v1/1/random.php').then((response) => {
+                    showInCards(response);
+                });
+            }
+        }
     }
-})
+}) //get meals from api and show them in cards when clicked on enter key
 document.querySelector('#search-btn').addEventListener('click',()=>{
+    contentContainer.innerHTML=''
+    if (searchInput.value.trim() !=="") {
         getDataFromApi(`https://www.themealdb.com/api/json/v1/1/search.php?s=${searchInput.value.trim()}`).then((response)=>{
-            contentContainer.innerHTML=''
-            showInCards(response)
+            showInCards(response);
         })
-})
+    }else {
+        for (let i = 0; i < 6; i++) {
+            getDataFromApi('https://www.themealdb.com/api/json/v1/1/random.php').then((response) => {
+                showInCards(response);
+            });
+        }
+    }
+}) //get meals from api and show them in cards when clicked on search icon
 //==========Functions=================
 function recipeMe(data) {
     let meal = data.meals[0]
@@ -52,7 +69,7 @@ function recipeMe(data) {
         }
     }
     modalBody.append(ingredients);
-}
+}// this function gets the recipe of the clicked meal and show in inside modal
 function showInCards(data,indexOfArray=0) {
     lastArray =[];
     let firstIndex = 0;
@@ -114,14 +131,14 @@ function showInCards(data,indexOfArray=0) {
         })
         createPages(data.meals,indexOfArray)
     }
-}
+}//this function create the cards and fill them with the given data array
 function getDataFromApi(url,) {
     return fetch(url)
         .then(async (response) => {
             Array = await response.json();
             return Array
         })
-}
+}//this is simple fetch function that returns the response
 function extract(arrayToExtract) {
     let extractedArray = {
         meals :[]
@@ -132,9 +149,9 @@ function extract(arrayToExtract) {
         })
     })
     return extractedArray
-}
+}//this function take array of data and return the data in other format to fit the process of others functions in this script
 function createPages(data, indexOfData) {
-    let numberOfPage = Math.ceil(data.length / 6); // here we divide the array length by number of rows that we want and then ceil the result to make the number integer
+    let numberOfPage = Math.ceil(data.length / 6); // here we divide the array length by number of cards that we want and then ceil the result to make the number integer
     let ul = document.createElement('ul');
     ul.classList.add('pagination');
     let previous = document.createElement("li");
@@ -183,7 +200,7 @@ function createPages(data, indexOfData) {
         });
     }
 
-}
+}// this function decide how many pages will be and create the pagination
 
 // ============= design ========================
 window.onscroll = () => {
@@ -192,14 +209,14 @@ window.onscroll = () => {
     } else {
         document.querySelector('nav.navbar').classList.remove('scrolled');
     }
-}
+}// add scrolled class to the nav when the scroll point reaches 200px
 document.querySelector('nav.navbar button').addEventListener('click', () => {
     document.querySelectorAll('#offcanvasNavbar .nav-link').forEach((link) => {
         link.classList.add('side');
-    })
+    })//add the side class when opening menu
     document.querySelector('.offcanvas-backdrop').addEventListener('click', () => {
         removeSideClass()
-    })
+    })// remove side class from links in menu on click everywhere els outside the menu
 })
 document.querySelector('#offcanvasNavbar button').addEventListener('click', () => {
     removeSideClass()
@@ -209,4 +226,4 @@ function removeSideClass() {
     document.querySelectorAll('#offcanvasNavbar .nav-link').forEach((link) => {
         link.classList.remove('side');
     })
-}
+}// remove side class from all links of menu

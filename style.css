@@ -114,8 +114,8 @@
 }
 
 @media screen and (max-width: 490px) {
-  #content {
-    padding-top: 8rem !important;
+  #content.page2 {
+    padding-top: 6rem !important;
   }
 }
 
